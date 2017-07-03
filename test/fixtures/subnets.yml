@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subnet: MyString
+  mask: MyString
+  description: MyString
+
+two:
+  subnet: MyString
+  mask: MyString
+  description: MyString

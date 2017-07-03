@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170703141315) do
+ActiveRecord::Schema.define(version: 20170703143844) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",               default: "", null: false
@@ -24,6 +24,26 @@ ActiveRecord::Schema.define(version: 20170703141315) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
+  end
+
+  create_table "ipaddresses", force: :cascade do |t|
+    t.integer  "subnet_id"
+    t.string   "ip_address"
+    t.boolean  "is_gateway"
+    t.boolean  "is_broadcast"
+    t.integer  "state"
+    t.integer  "owner_id"
+    t.date     "expire_date"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "subnets", force: :cascade do |t|
+    t.string   "subnet"
+    t.string   "mask"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
