@@ -29,13 +29,17 @@ ActiveRecord::Schema.define(version: 20170703143844) do
   create_table "ipaddresses", force: :cascade do |t|
     t.integer  "subnet_id"
     t.string   "ip_address"
-    t.boolean  "is_gateway"
+    t.boolean  "is_network"
     t.boolean  "is_broadcast"
     t.integer  "state"
     t.integer  "owner_id"
-    t.date     "expire_date"
+    t.string   "description"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["ip_address"], name: "index_ipaddresses_on_ip_address", unique: true
+    t.index ["owner_id"], name: "index_ipaddresses_on_owner_id"
+    t.index ["state"], name: "index_ipaddresses_on_state"
+    t.index ["subnet_id"], name: "index_ipaddresses_on_subnet_id"
   end
 
   create_table "subnets", force: :cascade do |t|
