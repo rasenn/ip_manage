@@ -48,7 +48,5 @@ class Subnet < ApplicationRecord
   def unregister
     self.destroy
   end
-    
-
 
 end

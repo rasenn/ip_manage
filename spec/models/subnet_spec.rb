@@ -23,6 +23,19 @@ RSpec.describe Subnet, type: :model do
 	expect(ipa[-1].is_broadcast).to be true
 	expect(ipa[-1].is_network).to be false
       end
+    end
+
+    context "mask 30" do
+      it "should be success" do
+        subnet = "192.168.1.0"
+	mask = "30"
+	description = "sample"
+        result = Subnet.register(subnet,mask,description)
+	expect(Subnet.find(1).subnet).to eq subnet
+	expect(Subnet.find(1).mask).to eq mask
+	expect(Ipaddress.all.size).to eq 4
+	expect(result).to eq true
+      end
       
     end
 
@@ -79,11 +92,11 @@ RSpec.describe Subnet, type: :model do
         result = Subnet.register(subnet,mask,description)
 	sub = (Subnet.all)[0]
 	expect(sub.ipaddresses.size).to be 256
-	expect(Subnet.all.size).to eq 1
+	expect(Subnet.all.count).to eq 1
 
 	sub.unregister
 	expect(sub.ipaddresses.size).to be 0
-	expect(Subnet.all.size).to eq 0
+	expect(Subnet.all.count).to eq 0
 	
 	
       end
