@@ -12,7 +12,15 @@ class Ipaddress < ApplicationRecord
     else
       return nil
     end
-
   end
 
+  def refund(user_id)
+    if self.owner_id == user_id
+      self.owner_id = -1
+      if self.save
+        return true
+      end
+    end
+    return false
+  end
 end
