@@ -1,8 +1,6 @@
 require 'ipaddr'
 
 class Subnet < ApplicationRecord
-  has_many :ipaddresses, dependent: :destroy
-
   
   ## 192.168.1.1/24の形式のみ受け付ける。
   def self.register(subnet, mask, description)
@@ -10,7 +8,7 @@ class Subnet < ApplicationRecord
     return false if mask.to_i == 0
 
     begin
-      sub = IPAddr.new(subnet.to_s + "/" + mask.to_s)
+      sub = IPAddr.new(subnet.to_s + "/" mask.to_s)
 
       # ipv4でなければfalseを返す。
       return false unless sub.ipv4?
@@ -31,24 +29,17 @@ class Subnet < ApplicationRecord
 	  is_broadcast = (counter == ( sub_size -1 ))
 
           reg_ip = Ipaddress.new(:subnet_id => reg_sub.id, :ip_address => ip.to_s, :is_network => is_network,
-	  	        :is_broadcast => is_broadcast, :state => -1, :owner_id => nil)
+	  	        :is_broadcast => is_broadcast, :state => -1, :owner => nil)
 	  reg_ip.save!
-
-	  counter += 1
         end
       end
-    rescue
+    rescure
     # IPアドレス/サブネットマスクがおかしい場合
       return false
     end
 
     return true      
   end
-
-  def unregister
-    self.destroy
-  end
-    
 
 
 end
