@@ -1,2 +1,4 @@
-<h1>IpAddress#dispense</h1>
-<p>Find me in app/views/ip_address/dispense.html.erb</p>
+<%= form_tag :action => "submit_dispense" do %>
+  <%= label_tag "description" %>:<%= text_field_tag "description" %> <br />
+  <%= submit_tag "Submit" %>
+<% end %>

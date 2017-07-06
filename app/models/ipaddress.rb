@@ -1,12 +1,13 @@
 class Ipaddress < ApplicationRecord
   belongs_to :subnet
 
-  def self.dispense(user_id)
+  def self.dispense(user_id, description ="")
     d = Ipaddress.where(owner_id: nil).where(is_network: false).where(is_broadcast: false).first
 
     return nil unless d
 
     d.owner_id = user_id
+    d.description = description
     if d.save
       return d
     else

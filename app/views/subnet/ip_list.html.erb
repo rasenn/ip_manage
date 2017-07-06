@@ -1,2 +1,23 @@
-<h1>Subnet#ip_list</h1>
-<p>Find me in app/views/subnet/ip_list.html.erb</p>
+<%= @subnet.subnet %> / <%= @subnet.mask %><br />
+<br /><br />
+
+<%= link_to "戻る", :action => "menu" %><br /><br />
+
+ip / own_user / state <br />
+
+<% @subnet.ipaddresses.each do |ip| %>
+  <%= ip.ip_address%> / 
+  
+  <%# p ip.owner_id %>
+  <% if ip.owner_id == nil || ip.owner_id == -1 %> - 
+  <% else %> 使用者あり
+  <% end %> / 
+  
+  <% if ip.is_network %> network address
+  <% elsif ip.is_broadcast %> broadcast address
+  <% else %> normal
+  <% end %><br />
+
+
+<% end %>
+

@@ -1,2 +1,13 @@
-<h1>Subnet#menu</h1>
-<p>Find me in app/views/subnet/menu.html.erb</p>
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "#{key}") %>
+<% end %>
+
+<br />
+一覧(<%= @subnets.size %> 件)<br />
+
+<% @subnets.each do |s| %>
+  <%= link_to (s.subnet + " / " + s.mask), :action => "ip_list", subnet_id: s.id %> : <%= s.description %> : <%= link_to "delete", :action => "delete" , subnet_id: s.id %><br />
+<% end %>
+<br /><br /><br />
+<%= link_to "登録", :action => "register" %><br />
+

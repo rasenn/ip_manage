@@ -1,2 +1,6 @@
-<h1>Subnet#register</h1>
-<p>Find me in app/views/subnet/register.html.erb</p>
+<%= form_tag :action => "submit_register" do %>
+  <%= label_tag "subnet" %>:<%= text_field_tag "subnet" %> <br />
+  <%= label_tag "mask" %>:<%= text_field_tag "mask" %> <br />
+  <%= label_tag "description" %>:<%= text_field_tag "description" %> <br />
+  <%= submit_tag "Submit" %>
+<% end %>
