@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'ip_address/menu'
+  root to: "ip_address#menu"
+
+  get 'ip_address/menu', as: :user_root
 
   get 'ip_address/dispense'
 
@@ -9,7 +11,7 @@ Rails.application.routes.draw do
 
   get 'ip_address/submit_delete'
 
-  get 'subnet/menu'
+  get 'subnet/menu', as: :admin_user_root
 
   get 'subnet/register'
 

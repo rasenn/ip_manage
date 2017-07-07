@@ -1,4 +1,5 @@
 class SubnetController < ApplicationController
+  before_action :authenticate_admin_user!
 
   def menu
     @subnets = Subnet.all
