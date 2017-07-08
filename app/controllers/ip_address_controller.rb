@@ -2,7 +2,8 @@ class IpAddressController < ApplicationController
   before_action :authenticate_user!
 
   def menu
-    @own_address = Ipaddress.where(owner_id: current_user.id)
+    @own_address = current_user.ip_addresses
+#Ipaddress.where(owner: current_user)
   end
 
   def dispense

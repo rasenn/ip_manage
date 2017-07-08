@@ -10,6 +10,7 @@ class Subnet < ApplicationRecord
     return false if mask.to_i == 0
 
     begin
+#      binding.pry
       sub = IPAddr.new(subnet.to_s + "/" + mask.to_s)
 
       # ipv4でなければfalseを返す。
@@ -29,16 +30,17 @@ class Subnet < ApplicationRecord
         sub.to_range.each do |ip|
 	  is_network = (counter == 0)
 	  is_broadcast = (counter == ( sub_size -1 ))
-
-          reg_ip = Ipaddress.new(:subnet_id => reg_sub.id, :ip_address => ip.to_s, :is_network => is_network,
-	  	        :is_broadcast => is_broadcast, :state => -1, :owner_id => nil)
+          reg_ip = Ipaddress.new(:subnet_id => reg_sub.id, 
+                        :ip_address => ip.to_s, :is_network => is_network,
+	  	        :is_broadcast => is_broadcast, :state => -1 )
 	  reg_ip.save!
 
 	  counter += 1
         end
       end
-    rescue
+    rescue => e
     # IPアドレス/サブネットマスクがおかしい場合
+      p e
       return false
     end
 

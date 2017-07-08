@@ -39,7 +39,7 @@ class SubnetController < ApplicationController
     end
 
     @subnet = Subnet.where(id: params["subnet_id"]).first
-#    binding.pry
+
     unless @subnet
       flash[:alert] = "該当のサブネットがありません。"
       redirect_to :action => "menu"
@@ -47,7 +47,4 @@ class SubnetController < ApplicationController
     
     @users = User.all.index_by(&:id)
   end
-
-
-
 end

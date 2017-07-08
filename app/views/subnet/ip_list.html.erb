@@ -24,8 +24,8 @@
     <tr>
       <td><%= ip.ip_address %></td>
       <td>
-	<% if ip.owner_id == nil || ip.owner_id == -1 %> - 
-	<% else %> <%= @users[ip.owner_id].email %>
+	<% if ip.user_id == nil || ip.user_id == -1 %> - 
+	<% else %> <%= ip.user.email %>
 	<% end %>
       </td>
       <td><%= ip.description %></td>
