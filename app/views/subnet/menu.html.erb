@@ -1,16 +1,49 @@
-<% flash.each do |key, value| %>
-  <%= content_tag(:div, value, class: "#{key}") %>
+
+<div class="page-header">
+  <h3>サブネット一覧(<%= @subnets.size %>件)</h3>
+</div>
+
+
+
+<table class="table table-striped table-hover">
+  <tr>
+    <th>サブネット</th>
+    <th>マスク</th>
+    <th>説明</th>
+    <th>-</th>
+  </tr>
+  <% @subnets.each do |s| %>
+    <tr>
+      <td> <%= link_to s.subnet , :action => "ip_list", subnet_id: s.id %></td>
+      <td><%= s.mask %></td>
+      <td><%= s.description %></td>
+      <td><%= link_to "サブネット削除", { :action => "delete", subnet_id: s.id }, {class: "btn btn-danger"} %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+<div class="page-header">
+  <h3>サブネット登録</h3>
+</div>
+
+<%= form_tag :action => "submit_register" do %>
+  <div class="form-group">
+    <%= label "subnet", "サブネット ( 192.168.1.0 など ):" %>
+    <%= text_field_tag "subnet", "", {class: "form-control"} %>
+  </div>
+
+  <div class="form-group">
+    <%= label "mask", "サブネットマスク ( 24 など ):" %>
+    <%= text_field_tag "mask", "", {class: "form-control"} %>
+  </div>
+
+  <div class="form-group">
+    <%= label "description", "説明:" %>
+    <%= text_field_tag "description", "", {class: "form-control"} %>
+  </div>
+
+  <%= submit_tag "登録" %>
 <% end %>
 
-<br />
-一覧(<%= @subnets.size %> 件)<br />
-
-<% @subnets.each do |s| %>
-  <%= link_to (s.subnet + " / " + s.mask), :action => "ip_list", subnet_id: s.id %> : <%= s.description %> : <%= link_to "delete", :action => "delete" , subnet_id: s.id %><br />
-<% end %>
-<br /><br /><br />
-<%= link_to "登録", :action => "register" %><br />
-
-<br /><br />
-<%= link_to "ログアウト", destroy_admin_user_session_path %>
 

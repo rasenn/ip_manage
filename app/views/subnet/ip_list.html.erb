@@ -1,23 +1,42 @@
-<%= @subnet.subnet %> / <%= @subnet.mask %><br />
-<br /><br />
+<br />
+<%= link_to "サブネット一覧へ戻る", :action => "menu" %>
 
-<%= link_to "戻る", :action => "menu" %><br /><br />
+<div class="page-header">
+  <h3><%= @subnet.subnet %> / <%= @subnet.mask %> ( <%= @subnet.ipaddresses.size %> IP)
+  </h3>
+</div>
 
-ip / own_user / state <br />
-
-<% @subnet.ipaddresses.each do |ip| %>
-  <%= ip.ip_address%> / 
-  
-  <%# p ip.owner_id %>
-  <% if ip.owner_id == nil || ip.owner_id == -1 %> - 
-  <% else %> 使用者あり
-  <% end %> / 
-  
-  <% if ip.is_network %> network address
-  <% elsif ip.is_broadcast %> broadcast address
-  <% else %> normal
-  <% end %><br />
+<div class="well">
+説明 :<br />
+<%= @subnet.description %>
+</div>
 
 
-<% end %>
+<table class="table table-striped table-hover">
+  <tr>
+    <th>IPアドレス</th>
+    <th>所有ユーザ</th>
+    <th>説明</th>
+    <th>状態</th>
+  </tr>
 
+  <% @subnet.ipaddresses.each do |ip| %>
+    <tr>
+      <td><%= ip.ip_address %></td>
+      <td>
+	<% if ip.owner_id == nil || ip.owner_id == -1 %> - 
+	<% else %> <%= @users[ip.owner_id].email %>
+	<% end %>
+      </td>
+      <td><%= ip.description %></td>
+      <td>
+        <% if ip.is_network %> ネットワークアドレス
+        <% elsif ip.is_broadcast %> ブロードキャストアドレス
+        <% else %> 払い出しアドレス
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "サブネット一覧へ戻る", :action => "menu" %>

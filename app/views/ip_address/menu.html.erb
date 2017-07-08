@@ -1,18 +1,35 @@
-<% flash.each do |key, value| %>
-  <%= content_tag(:div, value, class: "#{key}") %>
+
+<div class="page-header">
+  <h3>払い出し済みIPアドレス一覧(<%= @own_address.size %>件)</h3>
+</div>
+
+
+<table class="table table-striped table-hover">
+  <tr>
+    <th>IPアドレス</th>
+    <th>説明</th>
+    <th>-</th>
+  </tr>
+  <% @own_address.each do |ad| %>
+    <tr>
+      <td><%= ad.ip_address %></td>
+      <td><%= ad.description %></td>
+      <td><%= link_to "払い戻し", { :action => "submit_delete", ip_address_id: ad.id }, {class: "btn btn-danger"} %></td>
+    </tr>
+  <% end %>
+</table>
+
+<div class="page-header">
+  <h3>IPアドレス払い出し</h3>
+</div>
+
+<%= form_tag :action => "submit_dispense" do %>
+  <div class="form-group">
+    <%= label "description", "説明 ( A案件利用 / 個人利用など ) :" %>
+    <%= text_field_tag "description", "", {class: "form-control"} %>
+  </div>
+  <%= submit_tag "払い出し" %>
 <% end %>
-<br /><br />
 
-<%= current_user.email %><br /><br />
 
-アドレス：<br />
-<% @own_address.each do |ad| %>
-  <%= ad.ip_address %>:<%= ad.description %>:<%= link_to "払い戻し", :action => "submit_delete", ip_address_id: ad.id %><br />
-<% end %>
-
-<br /><br />
-<%= link_to "IP払い出し", :action => "dispense" %>
-
-<br /><br />
-<%= link_to "ログアウト", destroy_user_session_path %>
 

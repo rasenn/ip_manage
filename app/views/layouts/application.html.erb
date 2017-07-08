@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>IpManage</title>
+    <title>IP払い出し管理システム</title>
     <%= csrf_meta_tags %>
 
-    <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%# for bootstrap %>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag    "bootstrap", media: "all" %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
   </head>
 
   <body>
-    <%= yield %>
+
+
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+    
   </body>
 </html>
