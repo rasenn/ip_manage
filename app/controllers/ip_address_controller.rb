@@ -14,7 +14,7 @@ class IpAddressController < ApplicationController
      description = params["description"] || ""
      @ipa = Ipaddress.dispense(current_user.id, description)
      unless @ipa 
-       flash[:notice] = "空きIPアドレスがありません。"
+       flash[:alert] = "空きIPアドレスがありません。"
      else
        flash[:notice] = @ipa.ip_address + "が払い出されました。"
      end
@@ -35,7 +35,7 @@ class IpAddressController < ApplicationController
     if result
       flash[:notice] = @ip.ip_address + "を払い戻しました。"
     else
-      flash[:notice] = "該当のアドレスの払い戻しができませんでした。"
+      flash[:alert] = "該当のアドレスの払い戻しができませんでした。"
     end
     redirect_to :action => "menu"
 
