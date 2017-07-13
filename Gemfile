@@ -75,5 +75,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 gem 'rails_admin'
-
-
+gem "devise_ldap_authenticatable"
+gem "net-ldap"
+gem "activeldap"

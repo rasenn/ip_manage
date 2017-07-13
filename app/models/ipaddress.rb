@@ -19,6 +19,7 @@ class Ipaddress < ApplicationRecord
   def refund(user_id)
     if self.user_id == user_id
       self.user_id = -1
+      self.description = ""
       if self.save
         return true
       end

@@ -7,8 +7,7 @@
 </div>
 
 <div class="well">
-説明 :<br />
-<%= @subnet.description %>
+説明 :<br /><%= @subnet.description %>
 </div>
 
 
@@ -25,7 +24,7 @@
       <td><%= ip.ip_address %></td>
       <td>
 	<% if ip.user_id == nil || ip.user_id == -1 %> - 
-	<% else %> <%= ip.user.email %>
+	<% else %> <%= ip.user.displayname %>
 	<% end %>
       </td>
       <td><%= ip.description %></td>
