@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
         	<p class="navbar-text"><a href="/rails_admin/">rails_admin</a></p>
-        	<p class="navbar-text"><%= current_admin_user.email %></p>
+        	<p class="navbar-text"><%= current_admin_user.username %></p>
                 <li class="active"><%= link_to "ログアウト", destroy_admin_user_session_path %></li>
         	<li>&nbsp;</li>
               </ul>
